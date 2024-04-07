@@ -1,9 +1,9 @@
 const Router = ReactRouterDOM.HashRouter
-const {Route, Routes} = ReactRouterDOM
-const {useState, useEffect} = React
+const { Route, Routes } = ReactRouterDOM
+const { useState, useEffect } = React
 
 import { AppNav } from './cmps/AppNav.jsx'
-// import { Home } from './pages/Home.jsx'
+import { StoryIndex } from './pages/StoryIndex.jsx'
 // import { User } from './pages/User.jsx'
 // import { Notifications } from './pages/Notifications.jsx'
 // import { UserProfile } from './pages/UserProfile.jsx'
@@ -17,6 +17,12 @@ export function RootCmp() {
     return <Router>
         <section className='app main-layout'>
             <AppNav />
+
+            <main className="full main-layout">
+                <Routes>
+                    <Route path="/" element={<StoryIndex />} />
+                </Routes>
+            </main>
         </section>
-    </Router>    
+    </Router>
 }

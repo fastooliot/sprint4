@@ -1,6 +1,8 @@
 /* Base */
 @import 'base/base.css';
 
+/* Pages */
+@import 'pages/storyIndex.css';
 
 
 /* Components */
