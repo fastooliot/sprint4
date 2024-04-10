@@ -1,3 +1,5 @@
+const { useState } = React
+
 import StoryPreview from './StoryPreview.jsx'
 
 export function StoryList({ stories }) {
@@ -23,12 +25,12 @@ export function StoryList({ stories }) {
                 </section>
                 <section className='story-comments-command'>
                     <section className='actions-buttons'>
-                        <img src=".\assets\img\icons\heart.svg" alt="" />
-                        <img src=".\assets\img\icons\comment.svg" alt="" />
-                        <img src=".\assets\img\icons\sent.svg" alt="" />
+                        <img src=".\assets\img\icons\heart.svg" alt="" title='Like'/>
+                        <img src=".\assets\img\icons\comment.svg" alt="" title='Comment' />
+                        <img src=".\assets\img\icons\sent.svg" alt="" title='Share post' />
                     </section>
                     <section className='bookmark-button'>
-                        <img src=".\assets\img\icons\bookmark.svg" alt="" />
+                        <img src=".\assets\img\icons\bookmark.svg" alt="" title='Save'/>
                     </section>
                 </section>
             </section>

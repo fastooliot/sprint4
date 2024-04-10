@@ -74,3 +74,13 @@
   display: flex;
   justify-content: space-between;
 }
+
+.bookmark-button img:hover{
+  cursor: pointer;
+  background-color: #80808073;
+}
+
+.actions-buttons img:hover{
+  cursor: pointer;
+  background-color: #80808073;
+}
