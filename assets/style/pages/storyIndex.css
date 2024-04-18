@@ -30,6 +30,7 @@
 .story{
   margin-left: 150px;
   font-size: 14px;
+  width: 470px;
 }
 
 .story-header span{
@@ -83,4 +84,20 @@
 .actions-buttons img:hover{
   cursor: pointer;
   background-color: #80808073;
+}
+
+.story-fullname {
+  font-weight: bold;
+}
+
+.more-button {
+  color: #A8A8A8;
+}
+
+.more-button:hover{
+  cursor: pointer;
+}
+
+.story-text {
+  width: 100%;
 }

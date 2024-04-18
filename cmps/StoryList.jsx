@@ -1,6 +1,8 @@
-const { useState } = React
-
-import StoryPreview from './StoryPreview.jsx'
+import { LikesPreview } from './LikesPreview.jsx'
+import { StoryText } from './StoryText.jsx'
+import { StoryComments } from './StoryComments.jsx'
+import { AddComment } from './AddComment.jsx'
+import { StoryActionButtons } from './StoryActionButtons.jsx'
 
 export function StoryList({ stories }) {
     if (!stories.length) return <div>No stories to show</div>
@@ -25,13 +27,24 @@ export function StoryList({ stories }) {
                 </section>
                 <section className='story-comments-command'>
                     <section className='actions-buttons'>
-                        <img src=".\assets\img\icons\heart.svg" alt="" title='Like'/>
+                        <StoryActionButtons story = {story} />
+
+                        {/* <img src=".\assets\img\icons\heart.svg" alt="" title='Like' />
                         <img src=".\assets\img\icons\comment.svg" alt="" title='Comment' />
-                        <img src=".\assets\img\icons\sent.svg" alt="" title='Share post' />
+                        <img src=".\assets\img\icons\sent.svg" alt="" title='Share post' /> */}
                     </section>
                     <section className='bookmark-button'>
-                        <img src=".\assets\img\icons\bookmark.svg" alt="" title='Save'/>
+                        <img src=".\assets\img\icons\bookmark.svg" alt="" title='Save' />
                     </section>
+                </section>
+                <section className='story-text-row'>
+                    <StoryText story = {story} />
+                </section>
+                <section className='story-comments'>
+                    <StoryComments story = {story} />
+                </section>
+                <section className='add-comment'>
+                    <AddComment story = {story} />
                 </section>
             </section>
             </li>)

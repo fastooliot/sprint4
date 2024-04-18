@@ -7,7 +7,8 @@ const STORY_KEY = 'storyDB'
 _createStories()
 
 export const storyService = {
-    query
+    query,
+    addLike
 }
 
 function query() {
@@ -30,12 +31,12 @@ async function _createStories() {
         for (var i = 1; i < 5; i++) {
             const imageIdx = utilService.getRandomIntInclusive(1, 13)
             var story = await _createStory(utilService.makeLorem(), `./assets/img/stories/${imageIdx}.jpg`)
+            story = generateComments(story)
+            story = generateLikes(story)
             stories.push(story)
         }
         utilService.saveToStorage(STORY_KEY, stories)
     }
-    generateComments()
-    generateLikes()
 }
 
 async function _createStory(storyText, storyImgUrl, lat = 34, lng = 31) {
@@ -63,12 +64,10 @@ async function _createStory(storyText, storyImgUrl, lat = 34, lng = 31) {
     return story
 }
 
-function generateComments() {
-    let stories = utilService.loadFromStorage(STORY_KEY)
+function generateComments(story) {
     let users = utilService.loadFromStorage('userDB')
-    stories.forEach(story => {
-        for (var i = 0; i < utilService.getRandomIntInclusive(1, 50); i++) {
-            const user = users[utilService.getRandomIntInclusive(0, users.length - 1)]
+    users.forEach((user) => {
+        if (utilService.getRandomIntInclusive(0, 100) > 50) {
             story.comments.push({
                 id: utilService.makeId(),
                 by: {
@@ -76,26 +75,33 @@ function generateComments() {
                     fullname: user.fullname,
                     imgUrl: user.profileImgUrl
                 },
-                txt: utilService.makeLorem(utilService.getRandomIntInclusive(1,100)),
+                txt: utilService.makeLorem(utilService.getRandomIntInclusive(1, 100)),
                 likedBy: []
             })
         }
     })
-    utilService.saveToStorage(STORY_KEY, stories)
+    return story
 }
 
-function generateLikes() {
-    let stories = utilService.loadFromStorage(STORY_KEY)
+function generateLikes(story) {
     let users = utilService.loadFromStorage('userDB')
-    stories.forEach(story => {
-        users.forEach(user => {
-            (utilService.getRandomIntInclusive(0,100) < 50) && story.likedBy.push({
-                _id: user.id,
-                fullname: user.fullname,
-                imgUrl: user.profileImgUrl
-            }) 
+    users.forEach((user) => {
+        (utilService.getRandomIntInclusive(0, 100) < 50) && story.likedBy.push({
+            _id: user.id,
+            fullname: user.fullname,
+            imgUrl: user.profileImgUrl
         })
     })
-    utilService.saveToStorage(STORY_KEY, stories)
+    return story
+}
 
+function addLike(story, isLiked) {
+    if (!isLiked) {
+        story.likedBy.push({
+            own: 'own'
+        })
+    } else {
+        story.likedBy = story.likedBy.filter(item => item.own != 'own')
+    }
+    console.log(story)
 }
