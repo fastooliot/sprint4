@@ -1,5 +1,4 @@
 import { storyService } from '../services/story.service.js'
-import { LikesPreview } from '../cmps/LikesPreview.jsx'
 
 const { useState, useEffect } = React
 
@@ -18,7 +17,6 @@ export function StoryActionButtons({ story }) {
 
     function _like_render(isLiked) {
         const likeImg = isLiked ? ".\\assets\\img\\icons\\heart_red.svg" : ".\\assets\\img\\icons\\heart.svg"
-        LikesPreview({ story })
         return likeImg
     }
     

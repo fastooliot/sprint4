@@ -10,6 +10,7 @@ export function StoryIndex() {
     const [stories, setStories] = useState(null)
     const [users, setUsers] = useState(null)
 
+
     useEffect(() => {
         loadUsers()
         loadStories()

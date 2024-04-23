@@ -1,11 +1,14 @@
-import { LikesPreview } from './LikesPreview.jsx'
 import { StoryText } from './StoryText.jsx'
 import { StoryComments } from './StoryComments.jsx'
 import { AddComment } from './AddComment.jsx'
 import { StoryActionButtons } from './StoryActionButtons.jsx'
 
+const { useState, useEffect } = React
+
 export function StoryList({ stories }) {
+    var [storyPreview, setStoryPreview] = useState(null) 
     if (!stories.length) return <div>No stories to show</div>
+
     return <ul className="story-list no-bullets">
         {
             stories.map(story => <li key={story.id}><section className='story'>
@@ -23,15 +26,13 @@ export function StoryList({ stories }) {
                     </section>
                 </section>
                 <section className='story-image'>
-                    <img src={story.imgUrl} alt="sss" />
+                    <img onClick={()=>{
+                        storyPreview = story
+                    }} src={story.imgUrl} alt="sss" />
                 </section>
                 <section className='story-comments-command'>
                     <section className='actions-buttons'>
                         <StoryActionButtons story = {story} />
-
-                        {/* <img src=".\assets\img\icons\heart.svg" alt="" title='Like' />
-                        <img src=".\assets\img\icons\comment.svg" alt="" title='Comment' />
-                        <img src=".\assets\img\icons\sent.svg" alt="" title='Share post' /> */}
                     </section>
                     <section className='bookmark-button'>
                         <img src=".\assets\img\icons\bookmark.svg" alt="" title='Save' />
@@ -42,9 +43,6 @@ export function StoryList({ stories }) {
                 </section>
                 <section className='story-comments'>
                     <StoryComments story = {story} />
-                </section>
-                <section className='add-comment'>
-                    <AddComment story = {story} />
                 </section>
             </section>
             </li>)

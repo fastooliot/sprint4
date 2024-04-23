@@ -8,7 +8,8 @@ _createStories()
 
 export const storyService = {
     query,
-    addLike
+    addLike,
+    addComment
 }
 
 function query() {
@@ -103,5 +104,19 @@ function addLike(story, isLiked) {
     } else {
         story.likedBy = story.likedBy.filter(item => item.own != 'own')
     }
-    console.log(story)
+}
+
+function addComment(story, comment) {
+    let users = utilService.loadFromStorage('userDB')
+    story.comments.push({
+        id: utilService.makeId(),
+        by: {
+            _id: users[0].id,
+            fullname: users[0].fullname,
+            imgUrl: users[0].profileImgUrl
+        },
+        likedBy: [],
+        txt: comment
+    })
+    storageService.updateStory(STORY_KEY, story)
 }

@@ -1,3 +1,3 @@
-export function StoryPreview({story}) {
-    return console.log('sssssssss')
+export function StoryPreview({ story }) {
+    console.log(story)
 } 

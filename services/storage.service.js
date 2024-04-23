@@ -1,7 +1,11 @@
+import { reject } from "lodash"
+import { resolve } from "path"
+
 export const storageService = {
     query,
     get,
-    post
+    post,
+    updateStory
 }
 
 function query(entityType, delay = 500) {
@@ -28,4 +32,14 @@ function post(entityType, newEntity) {
 
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
+}
+
+function updateStory(entityType, story) {
+    return query(entityType).then(entities=> {
+        const idx = entities.findIndex(entity=> entity.id === story.id)
+        if (idx < 0) throw new Error (`Update failed, cannot find entity with id: ${story.id} in: ${entityType}`)
+        entities.splice(idx, 1, story)
+        _save(entityType, entities)
+        return(story)
+    })
 }

@@ -7,7 +7,7 @@
   border-radius: 50%;
 }
 
-.story-name:hover{
+.story-name,.comments-counter:hover{
   cursor: pointer;
 }
 
@@ -100,4 +100,9 @@
 
 .story-text {
   width: 100%;
+}
+
+textarea {
+  all: unset;
+  display: revert;
 }
