@@ -7,7 +7,6 @@ export function StoryComments({ story }) {
     const [textAreaValue, setTextAreaValue] = useState('')
 
     useEffect(()=> {
-        console.log('new comment')
     }, [commentsCounter])
 
     const handleTextChange = (event) => {
